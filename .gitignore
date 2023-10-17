@@ -1,0 +1,4 @@
+env/
+PedidosBack/db.sqlite3
+PedidosBack/PedidosBack/__pycache__/
+PedidosBack/PedidosBack/migrations/
