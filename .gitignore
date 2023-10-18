@@ -5,3 +5,6 @@ PedidosBack/PedidosBack/migrations/
 
 PedidosBack/negocio/__pycache__/
 PedidosBack/negocio/migrations/
+
+PedidosBack/login/__pycache__/
+PedidosBack/login/migrations/
