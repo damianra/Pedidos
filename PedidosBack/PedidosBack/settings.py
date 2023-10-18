@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
+
+    'negocio',
 ]
 
 MIDDLEWARE = [
@@ -78,12 +80,28 @@ WSGI_APPLICATION = 'PedidosBack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+## Conexion Sqlite3
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
+## Conexion MySQL
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pedidosdb',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',  
+        'PORT': '',
     }
 }
+
 
 
 # Password validation
@@ -107,7 +125,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Django REST framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ]
 }
 
