@@ -18,7 +18,7 @@ class Rubro(models.Model):
 
 class Empresa(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    nombre_empresa = models.CharField(max_length=250)
+    nombre_empresa = models.CharField(max_length=250, unique=True)
     slug = models.CharField(max_length=250, null=True)
     telefono = models.CharField(max_length=20)
     redes_sociales = models.ForeignKey(RedesSociales, on_delete=models.CASCADE, null=True)

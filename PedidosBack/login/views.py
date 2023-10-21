@@ -1,12 +1,16 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
-from login.serializadores import ObtenerToken, UserSerializer
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from rest_framework.views import APIView
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
+
+from login.serializadores import ObtenerToken, UserSerializer, UserLoginSerializer
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+
+
 import base64
 
 class Login(TokenObtainPairView):
@@ -24,7 +28,7 @@ class Login(TokenObtainPairView):
         if user:
             login_serializer = self.serializer_class(data=request.data)
             if login_serializer.is_valid():
-                user_serializer =  UserSerializer(user)
+                user_serializer =  UserLoginSerializer(user)
                 return Response({
                     'token': login_serializer.validated_data.get('access'),
                     'refresh-token': login_serializer.validated_data.get('refresh'),
@@ -46,3 +50,13 @@ class Logout(GenericAPIView):
             RefreshToken.for_user(user=user.first())
             return Response({'message':'Ha cerrado sesion exitosamente'}, status=status.HTTP_200_OK)
         return Response({'error': 'No existe usuario'}, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class RegisterUser(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response({'message': 'Usuario creado exitosamente.'}, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
