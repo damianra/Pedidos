@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'negocio',
     'login',
+    'productos',
 ]
 
 MIDDLEWARE = [

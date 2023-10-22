@@ -11,5 +11,7 @@ PedidosBack/login/migrations/
 PedidosBack/login/views_rest_token.py
 
 PedidosBack/productos/__pycache__/
-PedidosBack/productos/migrations/
+PedidosBack/productos/migrations/*
 PedidosBack/productos/migrations/__init__.py
+
+PedidosBack/media/*
